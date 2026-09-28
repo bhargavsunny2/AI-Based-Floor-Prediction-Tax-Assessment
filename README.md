@@ -1,93 +1,94 @@
 # AI-Based Floor Prediction and Tax Assessment System
 
-## Project Overview
+## 📌 Project Overview
 
-The AI-Based Floor Prediction and Tax Assessment System is a Python-based machine learning application designed to predict the authorized number of floors for a building and estimate property tax based on property and location details.
+The AI-Based Floor Prediction and Tax Assessment System is a Python-based machine learning application designed to predict the authorized number of floors for a building and estimate its property tax.
 
-The system uses Machine Learning for floor prediction and a rule-based calculation for property tax estimation. A Tkinter graphical user interface is provided for easy interaction, while SQLite is used to store assessment records.
+The system analyzes property and structural information such as plot area, building height, road width, and location score. A Machine Learning model is used to predict the number of floors, while a tax calculation module estimates the property tax.
 
----
+A graphical user interface (GUI) is developed using Tkinter to make the system simple and easy to use.
 
-## Objectives
+## 🎯 Objectives
 
-The main objectives of this project are:
+- Predict the number of authorized building floors.
+- Estimate property tax based on property details.
+- Automate the property assessment process.
+- Reduce manual calculation and assessment work.
+- Provide a simple graphical interface for users.
+- Store assessment history using SQLite.
 
-- Predict the number of floors using Machine Learning.
-- Estimate property tax automatically.
-- Provide a simple desktop-based graphical interface.
-- Store property assessment records securely.
-- Provide assessment history.
-- Reduce manual property assessment work.
-- Demonstrate the practical use of Artificial Intelligence and Machine Learning.
-
----
-
-## Technologies Used
+## 🛠️ Technologies Used
 
 - Python
+- Machine Learning
+- Scikit-learn
 - Pandas
 - NumPy
-- Scikit-learn
-- Joblib
 - Tkinter
 - SQLite
-- Machine Learning
-- HTML/Markdown documentation
+- Joblib
 
----
+## 🤖 Machine Learning
 
-## Machine Learning
-
-A Random Forest Classification model is used to predict the number of floors.
+The project uses a Random Forest Classification model to predict the number of floors.
 
 ### Input Features
 
-The model uses the following features:
-
-1. Plot Area
-2. Building Height
-3. Road Width
-4. Location Score
+- Plot Area
+- Building Height
+- Road Width
+- Location Score
 
 ### Output
 
-The model predicts:
+- Predicted Number of Floors
 
-- Number of Floors
+## 💰 Property Tax Assessment
 
----
+After predicting the number of floors, the system estimates the property tax using the property and assessment parameters.
 
-## Property Tax Assessment
+The final result displays:
 
-After predicting the number of floors, the system estimates property tax using:
+- Predicted Floors
+- Estimated Property Tax
 
-- Plot area
-- Predicted floors
-- Location score
+## 🖥️ Application Features
 
-The tax calculation is performed automatically after the floor prediction.
+- User-friendly Tkinter interface
+- Property assessment form
+- Machine learning-based floor prediction
+- Automatic tax estimation
+- Assessment history
+- SQLite database integration
+- Input validation
+- Clear result display
 
----
-
-## System Workflow
+## 📂 Project Structure
 
 ```text
-User enters property details
-            |
-            v
-     Input Validation
-            |
-            v
-    Machine Learning Model
-            |
-            v
-     Floor Prediction
-            |
-            v
-      Tax Calculation
-            |
-            v
-       Save Record
-            |
-            v
-      Display Results
+AI-Based-Floor-Prediction-Tax-Assessment/
+│
+├── app/
+│   ├── check_data.py
+│   ├── database.py
+│   ├── generate_dataset.py
+│   ├── gui.py
+│   ├── init_database.py
+│   ├── main.py
+│   ├── predict_floor.py
+│   ├── tax_calculation.py
+│   └── train_model.py
+│
+├── dataset/
+│   └── property_data.csv
+│
+├── documentation/
+│   ├── Major_Project_Report.docx
+│   └── PROJECT_DOCUMENTATION.txt
+│
+├── model/
+│   └── floor_prediction_model.pkl
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
