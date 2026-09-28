@@ -1,0 +1,239 @@
+AI-BASED FLOOR PREDICTION AND TAX ASSESSMENT SYSTEM
+====================================================
+
+1. INTRODUCTION
+---------------
+
+The AI-Based Floor Prediction and Tax Assessment System is a
+Python-based machine learning application designed to predict
+the number of floors of a building and estimate property tax.
+
+The system accepts property-related information such as plot
+area, building height, road width and location score.
+
+A Random Forest Classification model is used for floor
+prediction. After prediction, the system estimates property
+tax using a predefined calculation method.
+
+The application provides a graphical user interface using
+Tkinter and stores assessment records using SQLite.
+
+
+2. OBJECTIVES
+-------------
+
+The main objectives of the project are:
+
+1. To predict the number of building floors using Machine
+   Learning.
+
+2. To estimate property tax automatically.
+
+3. To provide a simple graphical user interface.
+
+4. To store assessment information in a database.
+
+5. To provide assessment history.
+
+6. To demonstrate the practical application of Artificial
+   Intelligence and Machine Learning.
+
+
+3. TECHNOLOGIES USED
+--------------------
+
+Programming Language:
+Python
+
+Libraries:
+Pandas
+Scikit-learn
+Joblib
+
+GUI:
+Tkinter
+
+Database:
+SQLite
+
+Machine Learning Algorithm:
+Random Forest Classifier
+
+
+4. INPUT FEATURES
+-----------------
+
+The system uses four input features:
+
+1. Plot Area
+2. Building Height
+3. Road Width
+4. Location Score
+
+
+5. OUTPUT
+---------
+
+The system produces:
+
+1. Predicted Number of Floors
+2. Estimated Property Tax
+
+
+6. SYSTEM WORKFLOW
+------------------
+
+User enters property information
+             |
+             v
+Input validation
+             |
+             v
+Machine Learning model
+             |
+             v
+Floor prediction
+             |
+             v
+Property tax calculation
+             |
+             v
+Database storage
+             |
+             v
+Results displayed to user
+
+
+7. MACHINE LEARNING
+-------------------
+
+A Random Forest Classification model is used to predict the
+number of floors.
+
+The model is trained using property-related features:
+
+- Plot area
+- Building height
+- Road width
+- Location score
+
+The trained model is saved using Joblib and loaded by the
+Tkinter application during execution.
+
+
+8. PROPERTY TAX ASSESSMENT
+--------------------------
+
+After the number of floors is predicted, the system calculates
+an estimated property tax.
+
+The calculation considers:
+
+- Plot area
+- Predicted number of floors
+- Location score
+
+The calculated amount is displayed to the user.
+
+
+9. DATABASE
+-----------
+
+SQLite is used to store property assessment records.
+
+Stored information includes:
+
+- Plot area
+- Building height
+- Road width
+- Location score
+- Predicted floors
+- Estimated property tax
+
+
+10. GRAPHICAL USER INTERFACE
+----------------------------
+
+The Tkinter interface provides:
+
+- Property input fields
+- Assess Property button
+- Clear button
+- View History button
+- Predicted floor result
+- Estimated tax result
+- Dashboard information
+
+
+11. TESTING
+-----------
+
+The project contains a separate testing program.
+
+The testing program checks:
+
+- Dataset loading
+- Machine Learning model
+- Database connection
+- Tax calculation
+
+The command used for testing is:
+
+python tests\test_system.py
+
+
+12. ADVANTAGES
+--------------
+
+1. Easy to use.
+2. Automated floor prediction.
+3. Automated tax estimation.
+4. Simple graphical interface.
+5. Database storage.
+6. Assessment history.
+7. Machine Learning integration.
+8. Suitable for academic demonstration.
+
+
+13. LIMITATIONS
+---------------
+
+1. The dataset is small and intended for demonstration.
+2. Tax calculation is simplified.
+3. Location score is entered manually.
+4. The system does not use live government zoning data.
+5. Results are not official government building approval
+   or official tax assessments.
+
+
+14. FUTURE ENHANCEMENTS
+----------------------
+
+Future versions can include:
+
+1. Larger real-world datasets.
+2. GIS and map integration.
+3. Government zoning data.
+4. Real-time location information.
+5. Web-based application.
+6. Cloud database.
+7. User authentication.
+8. PDF report generation.
+9. Advanced Machine Learning models.
+10. Property value prediction.
+
+
+15. CONCLUSION
+-------------
+
+The AI-Based Floor Prediction and Tax Assessment System
+demonstrates the integration of Machine Learning, Python,
+database technology and graphical user interface development.
+
+The system successfully predicts building floors, estimates
+property tax, stores assessment records and provides an
+interactive dashboard and assessment history.
+
+The project can be further extended using larger datasets,
+real-world zoning information and advanced Machine Learning
+techniques.
