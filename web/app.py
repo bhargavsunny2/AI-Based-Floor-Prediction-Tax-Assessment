@@ -6,9 +6,9 @@ import os
 
 app = Flask(__name__)
 
-# --------------------------------
-# Project paths
-# --------------------------------
+# ==========================================
+# PROJECT PATHS
+# ==========================================
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(
@@ -27,16 +27,17 @@ DATABASE_PATH = os.path.join(
     "property_assessments.db"
 )
 
-# --------------------------------
-# Load Machine Learning model
-# --------------------------------
+
+# ==========================================
+# LOAD MACHINE LEARNING MODEL
+# ==========================================
 
 model = joblib.load(MODEL_PATH)
 
 
-# --------------------------------
-# Database connection
-# --------------------------------
+# ==========================================
+# DATABASE CONNECTION
+# ==========================================
 
 def get_db_connection():
 
@@ -49,9 +50,9 @@ def get_db_connection():
     return connection
 
 
-# --------------------------------
-# Create database table
-# --------------------------------
+# ==========================================
+# INITIALIZE DATABASE
+# ==========================================
 
 def initialize_database():
 
@@ -60,12 +61,12 @@ def initialize_database():
     connection.execute("""
         CREATE TABLE IF NOT EXISTS assessments (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            plot_area REAL,
-            building_height REAL,
-            road_width REAL,
-            location_score INTEGER,
-            predicted_floors INTEGER,
-            estimated_tax REAL
+            plot_area REAL NOT NULL,
+            building_height REAL NOT NULL,
+            road_width REAL NOT NULL,
+            location_score INTEGER NOT NULL,
+            predicted_floors INTEGER NOT NULL,
+            estimated_tax REAL NOT NULL
         )
     """)
 
@@ -74,9 +75,9 @@ def initialize_database():
     connection.close()
 
 
-# --------------------------------
-# Tax calculation
-# --------------------------------
+# ==========================================
+# TAX CALCULATION
+# ==========================================
 
 def calculate_tax(
     plot_area,
@@ -104,12 +105,14 @@ def calculate_tax(
     return round(tax, 2)
 
 
-# --------------------------------
-# Home page
-# --------------------------------
+# ==========================================
+# HOME PAGE
+# ==========================================
 
 @app.route("/")
 def home():
+
+    initialize_database()
 
     return render_template(
         "index.html",
@@ -119,9 +122,9 @@ def home():
     )
 
 
-# --------------------------------
-# Property assessment
-# --------------------------------
+# ==========================================
+# PROPERTY ASSESSMENT
+# ==========================================
 
 @app.route(
     "/assess",
@@ -131,28 +134,42 @@ def assess():
 
     try:
 
-        # Get input values
+        # Make sure database/table exists
+        initialize_database()
+
+        # --------------------------------------
+        # Read input values
+        # --------------------------------------
 
         plot_area = float(
-            request.form["plot_area"]
+            request.form.get("plot_area", 0)
         )
 
         building_height = float(
-            request.form["building_height"]
+            request.form.get(
+                "building_height",
+                0
+            )
         )
 
         road_width = float(
-            request.form["road_width"]
+            request.form.get(
+                "road_width",
+                0
+            )
         )
 
         location_score = int(
-            request.form["location_score"]
+            request.form.get(
+                "location_score",
+                0
+            )
         )
 
 
-        # ----------------------------
+        # --------------------------------------
         # Validate input
-        # ----------------------------
+        # --------------------------------------
 
         if plot_area <= 0:
 
@@ -185,9 +202,9 @@ def assess():
             )
 
 
-        # ----------------------------
+        # --------------------------------------
         # Prepare ML input
-        # ----------------------------
+        # --------------------------------------
 
         input_data = pd.DataFrame([
             {
@@ -199,9 +216,9 @@ def assess():
         ])
 
 
-        # ----------------------------
+        # --------------------------------------
         # Predict floors
-        # ----------------------------
+        # --------------------------------------
 
         predicted_floors = int(
             model.predict(
@@ -210,9 +227,9 @@ def assess():
         )
 
 
-        # ----------------------------
-        # Calculate property tax
-        # ----------------------------
+        # --------------------------------------
+        # Calculate tax
+        # --------------------------------------
 
         estimated_tax = calculate_tax(
             plot_area,
@@ -221,9 +238,9 @@ def assess():
         )
 
 
-        # ----------------------------
+        # --------------------------------------
         # Save assessment
-        # ----------------------------
+        # --------------------------------------
 
         connection = get_db_connection()
 
@@ -255,9 +272,9 @@ def assess():
         connection.close()
 
 
-        # ----------------------------
+        # --------------------------------------
         # Display result
-        # ----------------------------
+        # --------------------------------------
 
         return render_template(
             "index.html",
@@ -277,34 +294,54 @@ def assess():
         )
 
 
-# --------------------------------
-# Assessment history
-# --------------------------------
+# ==========================================
+# HISTORY
+# ==========================================
 
 @app.route("/history")
 def history():
 
-    connection = get_db_connection()
+    try:
 
-    records = connection.execute(
-        """
-        SELECT *
-        FROM assessments
-        ORDER BY id DESC
-        """
-    ).fetchall()
+        # Make sure database/table exists
+        initialize_database()
 
-    connection.close()
+        connection = get_db_connection()
 
-    return render_template(
-        "history.html",
-        records=records
-    )
+        records = connection.execute(
+            """
+            SELECT
+                id,
+                plot_area,
+                building_height,
+                road_width,
+                location_score,
+                predicted_floors,
+                estimated_tax
+            FROM assessments
+            ORDER BY id DESC
+            """
+        ).fetchall()
+
+        connection.close()
+
+        return render_template(
+            "history.html",
+            records=records
+        )
+
+    except Exception as error:
+
+        return render_template(
+            "history.html",
+            records=[],
+            error=str(error)
+        )
 
 
-# --------------------------------
-# Run application
-# --------------------------------
+# ==========================================
+# START APPLICATION
+# ==========================================
 
 if __name__ == "__main__":
 
