@@ -4,6 +4,15 @@
 
 [Open the Live Application](https://ai-based-floor-prediction-tax-assessment.onrender.com)
 
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Assessment Result
+
+![Assessment Result](screenshots/result.png)
 ## 📌 Project Overview
 
 The AI-Based Floor Prediction and Tax Assessment System is a Python-based machine learning application designed to predict the authorized number of floors for a building and estimate its property tax.
