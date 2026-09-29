@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment History</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #172554;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f7fa;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #172554;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .button:hover {
+            background: #1e3a8a;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+
+        <h1>
+            Property Assessment History
+        </h1>
+
+        <p>
+            Previous Property Assessment Records
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            {% if records %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>
+                            Plot Area
+                            (sq.ft)
+                        </th>
+
+                        <th>
+                            Building Height
+                            (m)
+                        </th>
+
+                        <th>
+                            Road Width
+                            (m)
+                        </th>
+
+                        <th>
+                            Location Score
+                        </th>
+
+                        <th>
+                            Predicted Floors
+                        </th>
+
+                        <th>
+                            Estimated Tax
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+
+                        <td>
+                            {{ record["id"] }}
+                        </td>
+
+                        <td>
+                            {{ record["plot_area"] }}
+                        </td>
+
+                        <td>
+                            {{ record["building_height"] }}
+                        </td>
+
+                        <td>
+                            {{ record["road_width"] }}
+                        </td>
+
+                        <td>
+                            {{ record["location_score"] }}
+                        </td>
+
+                        <td>
+                            {{ record["predicted_floors"] }}
+                        </td>
+
+                        <td>
+                            ₹{{ "%.2f"|format(record["estimated_tax"]) }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h2>
+                    No Assessment Records
+                </h2>
+
+                <p>
+                    Complete a property assessment
+                    to create your first record.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+            <a href="/" class="button">
+                ← New Assessment
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+
+        AI-Based Floor Prediction and Tax Assessment System
+
+        <br>
+
+        Machine Learning Project
+
+    </div>
+
+</body>
+
+</html>
