@@ -102,6 +102,16 @@ AI-Based-Floor-Prediction-Tax-Assessment/
 ├── model/
 │   └── floor_prediction_model.pkl
 │
+├── screenshots/
+│   ├── home.png
+│   └── result.png
+│
+├── web/
+│   ├── app.py
+│   └── templates/
+│       ├── index.html
+│       └── history.html
+│
 ├── .gitignore
 ├── README.md
 └── requirements.txt
